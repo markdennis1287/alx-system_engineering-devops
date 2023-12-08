@@ -1,2 +1,2 @@
 #!/bin/bash
-find . -maxdepth 1 -type f -exec ls -l {} +; find .. -maxdepth 1 -type f -exec ls -l {} +; find /boot -maxdepth 1 -type f -exec ls -l {} +
+(find . -maxdepth 1 -type f -exec ls -l {} + && find .. -maxdepth 1 -type f -exec ls -l {} + && find /boot -maxdepth 1 -type f -exec ls -l {} +)
