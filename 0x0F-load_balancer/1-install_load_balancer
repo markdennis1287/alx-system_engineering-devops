@@ -43,8 +43,8 @@ frontend clickviral-tech-frontend
 
 backend clickviral-tech-backend
     balance roundrobin
-    server 238053-web-01 100.25.220.119 check
-    server 238053-web-02 100.25.147.34 check
+    server 453240-web-01 54.157.141.209 check
+    server 453240-web-02 18.207.112.219 check
 "
 
 # Apply the server configuration to the HAProxy config file
@@ -61,4 +61,4 @@ else
 fi
 
 # Output server names
-echo "Server names configured: 238053-web-01, 238053-web-02"
+echo "Server names configured: 453240-web-01, 453240-web-02"
