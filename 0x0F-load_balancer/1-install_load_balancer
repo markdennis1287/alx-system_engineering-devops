@@ -8,7 +8,6 @@ function install() {
 
     # Check if the given command is installed, if not, install it
     # Suppress output with -qq option for quiet installation
-    #shellcheck disable=SC2181
     if [ $? -ne 0 ]; then
         echo -e "    Installing: $1\n"
         sudo apt-get update -y -qq && \
@@ -25,11 +24,10 @@ install haproxy
 echo -e "\nSetting up HAProxy...\n"
 
 # Backup default HAProxy server config file
-sudo cp /etc/haproxy/haproxy.cfg haproxy_default.backup
+sudo cp /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.bak
 
 # HAProxy server configuration
-server_config=\
-"
+server_config="
 defaults
   mode http
   timeout client 15s
@@ -37,14 +35,14 @@ defaults
   timeout server 15s
   timeout http-request 10s
 
-frontend clickviral-tech-frontend
+frontend http-in
     bind *:80
-    default_backend clickviral-tech-backend
+    default_backend servers
 
-backend clickviral-tech-backend
+backend servers
     balance roundrobin
-    server 453240-web-01 54.157.141.209 check
-    server 453240-web-02 18.207.112.219 check
+    server 453240-web-01 54.157.141.209:80 check
+    server 453240-web-02 18.207.112.219:80 check
 "
 
 # Apply the server configuration to the HAProxy config file
