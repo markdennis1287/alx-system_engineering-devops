@@ -1,10 +1,6 @@
-exec { 'install-php-module':
-  command => '/usr/bin/apt-get install -y php-missing-module',
-  unless  => '/usr/bin/php -m | grep missing-module',
-}
+# Fixes Apache 500 error
 
-service { 'apache2':
-  ensure    => 'running',
-  enable    => true,
-  subscribe => Exec['install-php-module'],
+exec { 'fix-wordpress':
+  command => 'sed -i s/phpp/php/g /var/www/html/wp-settings.php',
+  path    => '/usr/local/bin/:/bin/'
 }
